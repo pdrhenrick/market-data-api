@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # 1. Sua API
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/code/app  # (Importante: Permite editar o código sem reiniciar o Docker!)
+    depends_on:
+      - redisdb
+
+  # 2. O Banco de Cache
+  redisdb:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
